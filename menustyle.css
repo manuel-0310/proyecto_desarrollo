@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+nav ul li a:hover {
+    color: yellow;
+}
+.reservation {
+    background-color: yellow;
+    color: black;
+    padding: 12px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.reservation:hover {
+    background-color: gold;
+}
+
+main {
+    display: flex;
+}
+
+footer {
+    background: #111;
+    padding: 40px 20px;
+    text-align: center;
+}
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1000px;
+    margin: auto;
+}
+.footer-section {
+    margin: 10px 0;
+}
+.footer-section h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+.footer-section p, .footer-section a {
+    color: gray;
+    text-decoration: none;
+    font-size: 14px;
+}
+.footer-section a:hover {
+    color: white;
+}
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 12px;
+    color: gray;
+}
