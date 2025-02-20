@@ -1,4 +1,15 @@
-
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: rgba(167, 159, 152, 0.132);        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(254, 198, 84); 
+    border-radius: 4px;   /* color of the scroll thumb */
+  }
 * {
     margin: 0;
     padding: 0;
@@ -83,39 +94,71 @@ nav ul li a:hover {
     font-weight: 200; /* Aplica Thin (100) */
     margin-bottom: 10px;
 }
-.opinion{
+.opinion {
+    position: relative;
     height: 90vh;
-
     justify-content: center;
     align-items: center;
-    padding-top: 10vh;
+    padding-top: 20px;
+    text-align: center;
 }
-.opinion h1{
-    margin-bottom: 50px;
-    font-size: 40px;
+
+.opinion h1 {
+    font-size: 60px;
+    font-weight: bold;
+    font-family: "Romana Bold", serif;
+    margin-bottom: 100px;
 }
-.opinion-contenido{
+
+.opinion-contenido {
     display: flex;
-    width: 80vw;
-    height: 45vh;
-    background-color: rgb(69, 69, 69);
-    border-radius: 20px;   
+    width: 77vw;
+    height: 50vh;
+    background-color: #262626;
+    border-radius: 20px;
     padding: 60px;
-    margin: 0 auto; 
+    margin: 0 auto 20px auto;
     text-align: left;
+    font-size: 1.3vw;
+    line-height: 1.2;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    position: relative; /* Importante para posicionar la imagen dentro */
 }
-.cita { 
-    width: 45vw;
-    font-size: larger;
-    justify-content: center; 
-    align-items: center;
+
+.cita {
+    width: 55%; /* Ajustar espacio de la cita */
+    position: absolute;
+    top: 30%;
 }
-.nombre{
+
+.nombre {
+    margin-top: 30px;
+}
+
+.ocupacion {
+    color: rgba(255, 255, 255, 0.451);
     margin-top: 10px;
 }
-.ocupacion{
-    color: rgba(255, 255, 255, 0.451);
+
+.opinion figure {
+    position: absolute;
+    bottom: -5px; /* Se mantiene en el borde inferior */
+    right: 0px; /* Ajusta la posición horizontal */
+    width: 35vw; /* Ajustar el tamaño */
 }
+
+.opinion figure img {
+    width: 100%;
+    
+
+        filter: drop-shadow(0px -10px 15px rgba(255, 255, 255, 0.418));
+                
+      
+}
+
+
 footer {
  
     padding: 40px 20px;
@@ -150,7 +193,7 @@ footer {
 }
 
 body {
-    background-image: url('fondo4.jpg');
+    background-image: url('src/fondo4.jpg');
 
 }
 
