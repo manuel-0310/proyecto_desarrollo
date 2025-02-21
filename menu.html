@@ -4,270 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="menustyle.css">
+    <link rel="stylesheet" href="landingstyle.css">
     <script src="scriptmenu.js"></script>
 </head>
 <body>
-    <header>
-        <div class="logo">Piazzetta</div>
-        <nav>
-            <ul>
-                <li><a href="landing.html">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Reservation</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-        <a href="#" class="reservation">Reservation</a>
-    </header>
+          <header>
+            <div class="logo">Piazzetta</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Reservation</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="menu.html" class="cart-button">
+                <img src="carrito.png" alt="Carrito de compras">
+            </a>
+            
+        </header>
+    
     <main>
-        <div class="menu">
-            <div class="bebida">
-                <h2 class="encabezado">Bebidas</h2>
-                    <section class="menu-item">
-                        <!--<img src="src/pizza1.png">-->
-                        <h3>Coca-cola</h3>
-                        <p class="price">$2</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza2.png">-->
-                        <h3>Manzana</h3>
-                        <p class="price">$3</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza3.webp">-->
-                        <h3>Sprite</h3>
-                        <p class="price">$2</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza4.png">-->
-                        <h3>Fanta</h3>
-                        <p class="price">$3</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza5.png">-->
-                        <h3>Agua Mineral</h3>
-                        <p class="price">$3</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza6.webp">-->
-                        <h3>Red Bull</h3>
-                        <p class="price">$4</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza7.png">-->
-                        <h3>Limonada</h3>
-                        <p class="price">$4</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza8.png">-->
-                        <h3>Jugo Natural</h3>
-                        <p class="price">$3</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
+        <div class="menu-container">
+            <div class="menu">
+                <!-- Entradas -->
+                <div class="categoria">
+                    <h2>Entradas</h2>
+                    <div class="grid-menu">
+                        <section class="menu-item">
+                            <h3>Pan de Ajo</h3>
+                            <p class="price">$6</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Alitas de Pollo</h3>
+                            <p class="price">$7</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Mozzarella Sticks</h3>
+                            <p class="price">$6</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Ensalada César</h3>
+                            <p class="price">$4</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                    </div>
+                </div>
+    
+                <!-- Pizzas -->
+                <div class="categoria">
+                    <h2>Pizzas</h2>
+                    <div class="grid-menu">
+                        <section class="menu-item">
+                            <h3>Margherita</h3>
+                            <p class="price">$32</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Pepperoni</h3>
+                            <p class="price">$37</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Vegetales y Queso</h3>
+                            <p class="price">$30</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                    </div>
+                </div>
+    
+                <!-- Bebidas -->
+                <div class="categoria">
+                    <h2>Bebidas</h2>
+                    <div class="grid-menu">
+                        <section class="menu-item">
+                            <h3>Coca-Cola</h3>
+                            <p class="price">$2</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Sprite</h3>
+                            <p class="price">$2</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Red Bull</h3>
+                            <p class="price">$4</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Té Helado</h3>
+                            <p class="price">$3</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                    </div>
+                </div>
+    
+                <!-- Postres -->
+                <div class="categoria">
+                    <h2>Postres</h2>
+                    <div class="grid-menu">
+                        <section class="menu-item">
+                            <h3>Brownie de Chocolate</h3>
+                            <p class="price">$5</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Churros</h3>
+                            <p class="price">$4</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                        <section class="menu-item">
+                            <h3>Helado</h3>
+                            <p class="price">$2.5</p>
+                            <button class="add-to-cart">+</button>
+                        </section>
+                    </div>
+                </div>
             </div>
-            <div class="entrada">
-                <h2 class="encabezado">Entradas</h2>
-                    <section class="menu-item">
-                        <!--<img src="src/pizza1.png">-->
-                        <h3>Pan de Ajo</h3>
-                        <p class="price">$6</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
+    
+            <!-- Carrito de compras -->
+            <section class="carritoCompra">
+                <h2>Tu carrito</h2>
+                <ul class="lista-carrito">
+                    <!-- Aquí se agregarán los productos dinámicamente -->
+                </ul>
+                <h3>Precio:</h3>
+                <p class="precio">$0</p>
+                
+                <div class="tax-section hidden">
+                    <h3>Tax</h3>
+                    <p class="impuesto">$0</p>
+                    <h3>Total</h3>
+                    <p class="total">$0</p>
+                </div>
             
-                    <section class="menu-item">
-                        <!--<img src="src/pizza2.png">-->
-                        <h3>Altias de Pollo</h3>
-                        <p class="price">$7</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
+                <button class="buy">Procesar Compra</button>
+                <button class="delate">Cancelar Compra</button>
+            </section>
             
-                    <section class="menu-item">
-                        <!--<img src="src/pizza3.webp">-->
-                        <h3>Palitos de Pan</h3>
-                        <p class="price">$5</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza4.png">-->
-                        <h3>Mozzarella sticks</h3>
-                        <p class="price">$6</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza5.png">-->
-                        <h3>Cheesy Bread</h3>
-                        <p class="price">$6</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza6.webp">-->
-                        <h3>Ensalada Cesar</h3>
-                        <p class="price">$4</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza7.png">-->
-                        <h3>Dips</h3>
-                        <p class="price">1.5</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza8.png">-->
-                        <h3>Pizza de entrada pequeña</h3>
-                        <p class="price">$5</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            </div>
-            <div class="comida">
-                <h2 class="encabezado">Pizzas</h2>
-                <section class="menu-item">
-                    <!--<img src="src/pizza1.png">-->
-                    <h3>Margherita</h3>
-                    <p class="price">$32</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-        
-                <section class="menu-item">
-                    <!--<img src="src/pizza2.png">-->
-                    <h3>Pepperoni</h3>
-                    <p class="price">$37</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-        
-                <section class="menu-item">
-                    <!--<img src="src/pizza3.webp">-->
-                    <h3>Noodles With Meat And Curry</h3>
-                    <p class="price">$25</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-        
-                <section class="menu-item">
-                    <!--<img src="src/pizza4.png">-->
-                    <h3>Butter Bread With Mixed Vegetables</h3>
-                    <p class="price">$30</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-        
-                <section class="menu-item">
-                    <!--<img src="src/pizza5.png">-->
-                    <h3>Melon Soup With Watermelon</h3>
-                    <p class="price">$35</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-        
-                <section class="menu-item">
-                    <!--<img src="src/pizza6.webp">-->
-                    <h3>Meat With Milk And Fruit Soup</h3>
-                    <p class="price">$47</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-        
-                <section class="menu-item">
-                    <!--<img src="src/pizza7.png">-->
-                    <h3>Fruit Salad With Meat Role</h3>
-                    <p class="price">$40</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-        
-                <section class="menu-item">
-                    <!--<img src="src/pizza8.png">-->
-                    <h3>Vegetable And Meat Mixed Fruit Salad</h3>
-                    <p class="price">$30</p>
-                    <button class="add-to-cart">+</button>
-                </section>
-            </div>
-            <div class="postre">
-                <h2 class="encabezado">Postres</h2>
-                    <section class="menu-item">
-                        <!--<img src="src/pizza1.png">-->
-                        <h3>Brownie de chocolate</h3>
-                        <p class="price">$5</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza2.png">-->
-                        <h3>Churros</h3>
-                        <p class="price">$4</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza3.webp">-->
-                        <h3>Cinnamon Bread Twists</h3>
-                        <p class="price">$2</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza4.png">-->
-                        <h3>Pizza de postre</h3>
-                        <p class="price">$4</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza5.png">-->
-                        <h3>Tarta de manzana</h3>
-                        <p class="price">$4.3</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza6.webp">-->
-                        <h3>Helado</h3>
-                        <p class="price">$2.5</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza7.png">-->
-                        <h3>Mousse de Chocolate</h3>
-                        <p class="price">$3.85</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            
-                    <section class="menu-item">
-                        <!--<img src="src/pizza8.png">-->
-                        <h3>Crumble de frutas</h3>
-                        <p class="price">$3</p>
-                        <button class="add-to-cart">+</button>
-                    </section>
-            </div>
         </div>
-        <section class="carritoCompra">
-            <h2>Tu carrito</h2>
-            <h3>Precio:</h3>
-            <p class="precio">$0</p>
-            <h3>Tax</h3>
-            <p class="impuesto">$0</p>
-            <h3>Total</h3>
-            <p class="total">$0</p>
-            <button class="buy">Procesar Compra</button>
-            <button class="delate">Cancelar Compra</button>
-        </section>
     </main>
+    
     <footer>
         <div class="footer-content">
             <div class="footer-section">
