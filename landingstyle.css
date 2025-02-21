@@ -7,16 +7,9 @@ body::-webkit-scrollbar {
   }
   
   body::-webkit-scrollbar-thumb {
-    background-color: rgba(254, 197, 84, 0.526);
-    border-radius: 2%;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(254, 198, 84);
-    border-radius: 6px;
-}
-
-
+    background-color: rgb(254, 198, 84); 
+    border-radius: 4px;   /* color of the scroll thumb */
+  }
 * {
     margin: 0;
     padding: 0;
@@ -59,19 +52,30 @@ nav ul li a {
     transition: color 0.3s;
 }
 nav ul li a:hover {
-    color: yellow;
+    color: #ffd821;
 }
-.reservation {
-    background-color: yellow;
-    color: black;
-    padding: 12px 18px;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: background 0.3s;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
+/* Botón del carrito en lugar del botón de reservación */
+.cart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: 50px;
+    background-color: transparent; /* Sin fondo */
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
 
+.cart-button img {
+    width: 100%;
+    height: auto;
 }
+
+/* Efecto hover para agrandar el botón del carrito */
+.cart-button:hover {
+    transform: scale(1.1);
+}
+
 .reservation:hover {
     background-color: gold;
 }
@@ -279,9 +283,264 @@ body {
 .descripcion h3 {
     font-size: 35px;
     font-weight: lighter;
-    color: yellow;
+    color: #ffd821;
     font-family: "Romana Bold", serif;
 }
 
+/* Estilos para organizar el menú a la izquierda y el carrito a la derecha */
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 90%;
+    margin: 50px auto;
+    gap: 50px;
+}
+
+/* Menú a la izquierda */
+.menu {
+    flex: 2;  /* Ocupa más espacio */
+    text-align: left;
+}
+
+/* Títulos del menú */
+.menu h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+/* Grid para los items del menú */
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Estilos de cada item del menú */
+/* Estructura del menú con carrito a la derecha */
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 90%;
+    margin: 50px auto;
+    gap: 50px;
+}
+
+/* Menú a la izquierda */
+.menu {
+    flex: 2;  /* Ocupa más espacio */
+    text-align: left;
+}
+
+.menu h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+/* Grid para los items del menú */
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr)); /* 2 columnas */
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Estilos de cada item del menú */
+.menu-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-item h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.menu-item .price {
+    font-size: 20px;
+    color: #ffd821;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.add-to-cart {
+    background-color: #ffd821;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: gold;
+}
+
+/* Carrito de compras a la derecha */
+.carritoCompra {
+    flex: 1; /* Ocupa menos espacio */
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    max-width: 350px;
+    position: sticky;
+    top: 100px; /* Se mantiene visible al hacer scroll */
+}
+
+.carritoCompra h2 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.carritoCompra p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.carritoCompra .buy,
+.carritoCompra .delate {
+    background-color: #ffd821;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+.carritoCompra .buy:hover,
+.carritoCompra .delate:hover {
+    background-color: gold;
+}
+
+/* Estilos para el carrito */
+.carritoCompra {
+    flex: 1;
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    max-width: 350px;
+    position: sticky;
+    top: 100px;
+}
+
+/* Lista de productos en el carrito */
+.lista-carrito {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.lista-carrito li {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Ocultar la sección de impuestos por defecto */
+.tax-section.hidden {
+    display: none;
+}
+
+/* Botones del carrito */
+.carritoCompra .buy,
+.carritoCompra .delate {
+    background-color: yellow;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+.carritoCompra .buy:hover,
+.carritoCompra .delate:hover {
+    background-color: gold;
+}
+
+/* Estilos para los productos en el carrito */
+.lista-carrito li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Alinear la cantidad a la derecha */
+.lista-carrito .cantidad {
+    font-size: 18px;
+    font-weight: bold;
+    color: yellow;
+}
+
+/* Estilos para los productos en el carrito */
+.lista-carrito li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Alinear la cantidad y el botón de eliminar */
+.lista-carrito .cantidad {
+    font-size: 18px;
+    font-weight: bold;
+    color: yellow;
+    margin-right: 10px;
+}
+
+/* Botón de eliminar producto (🗑️) */
+.remove-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: red;
+    transition: transform 0.2s ease;
+}
+
+.remove-item:hover {
+    transform: scale(1.2);
+}
 
 
