@@ -1,54 +1,61 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const cart = document.querySelector(".carritoCompra");
-    const addCart = document.querySelectorAll(".add-to-cart");
-    const buy = document.querySelector(".buy")
-    const delate = document.querySelector(".delate");
+document.addEventListener("DOMContentLoaded", function() {
+    let carrito = [];
+    const listaCarrito = document.querySelector(".lista-carrito");
+    const precioElemento = document.querySelector(".precio");
+    const impuestoElemento = document.querySelector(".impuesto");
+    const totalElemento = document.querySelector(".total");
+    const taxSection = document.querySelector(".tax-section");
 
-    //BOTON AGREGAR AL CARRO DE COMPRAS
-    addCart.forEach(button => {
-        button.addEventListener("click", function () {
-            const item = this.closest(".menu-item");
-            const name = item.querySelector("h3").textContent;
-            const price = parseFloat(item.querySelector(".price").textContent.replace("$", ""));
-            const currentPrice = parseFloat(document.querySelector(".precio").textContent.replace("$", ""));
-    
-            let existingItem = Array.from(cart.children).find(cartItem => 
-                cartItem.dataset.name === name
-            );
+    // Evento para agregar productos al carrito
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", function() {
+            const nombreProducto = this.parentElement.querySelector("h3").textContent;
+            const precioProducto = parseFloat(this.parentElement.querySelector(".price").textContent.replace("$", ""));
 
-            if (existingItem) {
-                let countSpan = existingItem.querySelector(".count");
-                let count = parseInt(countSpan.textContent.match(/\d+/)[0]) + 1;
-                countSpan.textContent = `(${count})`;
+            // Verificar si el producto ya está en el carrito
+            let productoExistente = carrito.find(item => item.nombre === nombreProducto);
+
+            if (productoExistente) {
+                productoExistente.cantidad++; // Aumentar la cantidad
             } else {
-                const cartItem = document.createElement("div");
-                cartItem.classList.add("cart-item");
-                cartItem.dataset.name = name; 
-                cartItem.innerHTML = `<h4>${name} <span class="count">(1)</span></h4>`;
-                cart.appendChild(cartItem);
+                carrito.unshift({ nombre: nombreProducto, precio: precioProducto, cantidad: 1 }); // Agregar nuevo producto
             }
-    
-            const suma = currentPrice + price;
-            const impuesto = parseFloat((suma * 0.035).toFixed(3));
-            const total = parseFloat((suma + impuesto).toFixed(3));
 
-            document.querySelector(".precio").textContent = `$${suma.toFixed(3)}`;
-            document.querySelector(".impuesto").textContent = `$${impuesto}`;
-            document.querySelector(".total").textContent = `$${total}`;
+            actualizarCarrito();
         });
     });
 
-    //BOTON PARA COMPRAR
-    buy.addEventListener("click", function (){
-        
+    // Evento para mostrar impuestos y total al hacer clic en "Procesar Compra"
+    document.querySelector(".buy").addEventListener("click", function() {
+        if (carrito.length > 0) {
+            taxSection.classList.remove("hidden"); // Mostrar tax y total
+        }
     });
 
-    //BOTON CANCELAR COMPRA
-    delate.addEventListener("click", function () {
-        document.querySelector(".precio").textContent = `$0`;
-        document.querySelector(".impuesto").textContent = `$0`;
-        document.querySelector(".total").textContent = `$0`;
-        const cartItems = cart.querySelectorAll(".cart-item");
-        cartItems.forEach(item => item.remove());
+    // Evento para limpiar el carrito al hacer clic en "Cancelar Compra"
+    document.querySelector(".delate").addEventListener("click", function() {
+        carrito = [];
+        taxSection.classList.add("hidden"); // Ocultar tax y total nuevamente
+        actualizarCarrito();
     });
+
+    function actualizarCarrito() {
+        listaCarrito.innerHTML = "";
+        let precioTotal = 0;
+
+        carrito.forEach(item => {
+            let li = document.createElement("li");
+            li.innerHTML = `<span class="nombre-producto">${item.nombre} ($${item.precio.toFixed(2)})</span>
+                            <span class="cantidad">x${item.cantidad}</span>`;
+            listaCarrito.appendChild(li);
+            precioTotal += item.precio * item.cantidad;
+        });
+
+        let tax = (precioTotal * 0.035).toFixed(2); // Impuesto del 3.5%
+        let total = (precioTotal + parseFloat(tax)).toFixed(2);
+
+        precioElemento.textContent = `$${precioTotal.toFixed(2)}`;
+        impuestoElemento.textContent = `$${tax}`;
+        totalElemento.textContent = `$${total}`;
+    }
 });
