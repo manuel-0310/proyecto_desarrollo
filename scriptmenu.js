@@ -44,10 +44,14 @@ document.addEventListener("DOMContentLoaded", function() {
         listaCarrito.innerHTML = "";
         let precioTotal = 0;
 
-        carrito.forEach(item => {
+        carrito.forEach((item, index) => {
             let li = document.createElement("li");
             li.innerHTML = `<span class="nombre-producto">${item.nombre} ($${item.precio.toFixed(2)})</span>
-                            <span class="cantidad">x${item.cantidad}</span>`;
+                            <span class="cantidad">x${item.cantidad}</span>
+                            <button class="eliminar-item" data-index="${index}">
+                                🗑️
+                            </button>`;
+
             listaCarrito.appendChild(li);
             precioTotal += item.precio * item.cantidad;
         });
@@ -58,6 +62,15 @@ document.addEventListener("DOMContentLoaded", function() {
         precioElemento.textContent = `$${precioTotal.toFixed(2)}`;
         impuestoElemento.textContent = `$${tax}`;
         totalElemento.textContent = `$${total}`;
+
+        // Agregar eventos a los botones de eliminar
+        document.querySelectorAll(".eliminar-item").forEach(button => {
+            button.addEventListener("click", function() {
+                let index = this.getAttribute("data-index");
+                carrito.splice(index, 1); // Eliminar el producto del carrito
+                actualizarCarrito(); // Actualizar la vista
+            });
+        });
     }
 
     function enviarPedido() {
