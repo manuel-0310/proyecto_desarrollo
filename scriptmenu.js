@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector(".buy").addEventListener("click", function() {
         if (carrito.length > 0) {
             taxSection.classList.remove("hidden"); // Mostrar tax y total
+            enviarPedido(); // Llamar a la función para actualizar la URL
         }
     });
 
@@ -57,5 +58,18 @@ document.addEventListener("DOMContentLoaded", function() {
         precioElemento.textContent = `$${precioTotal.toFixed(2)}`;
         impuestoElemento.textContent = `$${tax}`;
         totalElemento.textContent = `$${total}`;
+    }
+
+    function enviarPedido() {
+        const params = new URLSearchParams();
+
+        carrito.forEach((item, index) => {
+            params.append(`producto${index}`, `${item.nombre}(${item.cantidad})`);
+        });
+
+        params.append("total", totalElemento.textContent);
+
+        // Modifica la URL sin recargar la página
+        window.history.pushState({}, "", `?${params.toString()}`);
     }
 });

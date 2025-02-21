@@ -1,84 +1,24 @@
-body::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
-  }
-  
-  body::-webkit-scrollbar-track {
-    background: rgba(167, 159, 152, 0.132);        /* color of the tracking area */
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: rgb(254, 198, 84); 
-    border-radius: 4px;   /* color of the scroll thumb */
-  }
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-}
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-.logo {
-    font-family: 'Fira Sans Condensed', sans-serif;
-    font-size: 28px;
-    font-weight: 700; /* Aplica Bold */
-    color: #fff;
-    text-transform: uppercase; /* Opcional: convierte todo a mayúsculas */
+/* Definición de variables CSS para reutilización */
+:root {
+    --primary-font: "Romana Bold", serif;
+    --secondary-font: 'Poppins', sans-serif;
+    --primary-color: #fff;
+    --secondary-color: #262626;
+    --highlight-color: #ffd821;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    font-family: 'Poppins', sans-serif;
+
+h1, .descripcion h3 {
+    font-family: var(--primary-font);
+}
+
+p {
+    font-family: var(--secondary-font);
     font-weight: 200; /* Aplica Thin (100) */
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    transition: color 0.3s;
-}
-nav ul li a:hover {
-    color: #ffd821;
-}
-/* Botón del carrito en lugar del botón de reservación */
-.cart-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px; /* Ajusta el tamaño según sea necesario */
-    height: 50px;
-    background-color: transparent; /* Sin fondo */
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-
-.cart-button img {
-    width: 100%;
-    height: auto;
-}
-
-/* Efecto hover para agrandar el botón del carrito */
-.cart-button:hover {
-    transform: scale(1.1);
-}
-
-.reservation:hover {
-    background-color: gold;
-}
+/* Sección principal */
+/* Sección Principal */
 .main {
     margin-top: 40px;
     padding: 50px;
@@ -87,59 +27,165 @@ nav ul li a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center; /* Asegura que el texto se mantenga centrado */
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
+
+/* Título Principal */
 .main h1 {
     font-size: 90px;
-    font-family: "Romana Bold", serif;
     letter-spacing: -3px;
-
-
+    color: #fff; /* Mejor visibilidad en cualquier fondo */
 }
+
+/* Texto principal */
 .main p {
     font-size: 20px;
     margin-top: 15px;
     max-width: 700px;
-    font-weight: lighter;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 200; /* Aplica Thin (100) */
     margin-bottom: 10px;
+    color: #fff;
 }
+
+/* Sección Opinión */
 .opinion {
     position: relative;
     height: 90vh;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 20px;
     text-align: center;
 }
 
+/* Título Opinión */
 .opinion h1 {
     font-size: 60px;
     font-weight: bold;
-    font-family: "Romana Bold", serif;
     margin-bottom: 100px;
+}
+
+/* Imagen de la Opinión */
+.fotopizza .foto img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px; /* Suaviza los bordes */
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .main {
+        height: 40vh;
+        padding: 40px;
+    }
+
+    .main h1 {
+        font-size: 70px;
+    }
+
+    .main p {
+        font-size: 18px;
+        max-width: 600px;
+    }
+
+    .opinion {
+        height: 70vh;
+        padding: 30px;
+    }
+
+    .opinion h1 {
+        font-size: 50px;
+        margin-bottom: 60px;
+    }
+
+    .fotopizza .foto img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        height: 35vh;
+        padding: 30px;
+    }
+
+    .main h1 {
+        font-size: 50px;
+        letter-spacing: -2px;
+    }
+
+    .main p {
+        font-size: 16px;
+        max-width: 500px;
+    }
+
+    .opinion {
+        height: 60vh;
+        padding: 20px;
+    }
+
+    .opinion h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    .fotopizza .foto img {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        height: 30vh;
+        padding: 20px;
+    }
+
+    .main h1 {
+        font-size: 36px;
+    }
+
+    .main p {
+        font-size: 14px;
+        max-width: 90%;
+    }
+
+    .opinion {
+        height: auto;
+        padding: 10px;
+    }
+
+    .opinion h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .fotopizza .foto img {
+        width: 95%;
+    }
 }
 
 .opinion-contenido {
     display: flex;
     width: 77vw;
     height: 50vh;
-    background-color: #262626;
+    background-color: var(--secondary-color);
     border-radius: 20px;
     padding: 60px;
     margin: 0 auto 20px auto;
     text-align: left;
     font-size: 1.3vw;
     line-height: 1.2;
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+    font-family: var(--secondary-font);
     font-weight: bold;
-    position: relative; /* Importante para posicionar la imagen dentro */
+    position: relative;
 }
 
 .cita {
-    width: 55%; /* Ajustar espacio de la cita */
+    width: 55%;
     position: absolute;
     top: 30%;
 }
@@ -155,65 +201,14 @@ nav ul li a:hover {
 
 .opinion figure {
     position: absolute;
-    bottom: -5px; /* Se mantiene en el borde inferior */
-    right: 0px; /* Ajusta la posición horizontal */
-    width: 35vw; /* Ajustar el tamaño */
+    bottom: -5px;
+    right: 0px;
+    width: 35vw;
 }
 
 .opinion figure img {
     width: 100%;
-    
-
-        filter: drop-shadow(0px -10px 15px rgba(255, 255, 255, 0.418));
-                
-      
-}
-
-
-footer {
- 
-    padding: 40px 20px;
-    text-align: center;
-}
-.footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    max-width: 1000px;
-    margin: auto;
-}
-.footer-section {
-    margin: 10px 0;
-}
-.footer-section h3 {
-    color: white;
-    margin-bottom: 10px;
-}
-.footer-section p, .footer-section a {
-    color: gray;
-    text-decoration: none;
-    font-size: 14px;
-}
-.footer-section a:hover {
-    color: white;
-}
-.footer-bottom {
-    margin-top: 20px;
-    font-size: 12px;
-    color: gray;
-}
-
-body {
-    background-image: url('src/fondo4.jpg');
-
-}
-
-
-.fotopizza .foto img {
-    width: 70%; /* Ajusta el ancho al contenedor */
-    height: auto; /* Mantiene la proporción */
-    display: block; 
-    margin: 0 auto;
+    filter: drop-shadow(0px -10px 15px rgba(255, 255, 255, 0.418));
 }
 
 /* Sección "Try Our New Food Menu" */
@@ -225,16 +220,12 @@ body {
 .pizzadelacasa h1 {
     font-size: 60px;
     font-weight: bold;
-    font-family: "Romana Bold", serif;
     margin-bottom: 10px;
 }
+
 .pizzadelacasa p {
     font-size: 20px;
     max-width: 700px;
-    font-weight: lighter;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 200; /* Aplica Thin (100) */
-        text-align: center;
     margin: 10px auto 40px auto;
 }
 
@@ -246,17 +237,15 @@ body {
     text-align: left;
     max-width: 80%;
     margin: 0 auto;
-    gap: 40px; /* Espacio entre la imagen y el texto */
+    gap: 40px;
 }
 
-/* Ajuste de la imagen */
 .descripcion img {
-    width: 280px; /* Ajustado para que se parezca más a la imagen de referencia */
+    width: 280px;
     height: auto;
-    border-radius: 10px; /* Suaviza los bordes */
+    border-radius: 10px;
 }
 
-/* Estilos del texto */
 .textodescripcion {
     display: flex;
     flex-direction: column;
@@ -264,14 +253,12 @@ body {
     max-width: 500px;
 }
 
-/* Estilo del título */
 .descripcion h2 {
     font-size: 35px;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
-/* Estilo del párrafo */
 .descripcion .combination {
     font-size: 20px;
     line-height: 1.5;
@@ -279,268 +266,8 @@ body {
     margin-bottom: 20px;
 }
 
-/* Estilo del precio */
 .descripcion h3 {
     font-size: 35px;
     font-weight: lighter;
-    color: #ffd821;
-    font-family: "Romana Bold", serif;
+    color: var(--highlight-color);
 }
-
-/* Estilos para organizar el menú a la izquierda y el carrito a la derecha */
-.menu-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 90%;
-    margin: 50px auto;
-    gap: 50px;
-}
-
-/* Menú a la izquierda */
-.menu {
-    flex: 2;  /* Ocupa más espacio */
-    text-align: left;
-}
-
-/* Títulos del menú */
-.menu h2 {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-family: 'Fira Sans Condensed', sans-serif;
-}
-
-/* Grid para los items del menú */
-.grid-menu {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-    gap: 20px;
-    justify-content: center;
-    width: 100%;
-}
-
-/* Estilos de cada item del menú */
-/* Estructura del menú con carrito a la derecha */
-.menu-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 90%;
-    margin: 50px auto;
-    gap: 50px;
-}
-
-/* Menú a la izquierda */
-.menu {
-    flex: 2;  /* Ocupa más espacio */
-    text-align: left;
-}
-
-.menu h2 {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-family: 'Fira Sans Condensed', sans-serif;
-}
-
-/* Grid para los items del menú */
-.grid-menu {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr)); /* 2 columnas */
-    gap: 20px;
-    justify-content: center;
-    width: 100%;
-}
-
-/* Estilos de cada item del menú */
-.menu-item {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    transition: transform 0.3s ease, background-color 0.3s;
-}
-
-.menu-item:hover {
-    transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.menu-item h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-
-.menu-item .price {
-    font-size: 20px;
-    color: #ffd821;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.add-to-cart {
-    background-color: #ffd821;
-    color: black;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.add-to-cart:hover {
-    background-color: gold;
-}
-
-/* Carrito de compras a la derecha */
-.carritoCompra {
-    flex: 1; /* Ocupa menos espacio */
-    text-align: center;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    max-width: 350px;
-    position: sticky;
-    top: 100px; /* Se mantiene visible al hacer scroll */
-}
-
-.carritoCompra h2 {
-    font-size: 30px;
-    margin-bottom: 15px;
-}
-
-.carritoCompra p {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.carritoCompra .buy,
-.carritoCompra .delate {
-    background-color: #ffd821;
-    color: black;
-    border: none;
-    padding: 12px 20px;
-    margin-top: 10px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease;
-    width: 100%;
-}
-
-.carritoCompra .buy:hover,
-.carritoCompra .delate:hover {
-    background-color: gold;
-}
-
-/* Estilos para el carrito */
-.carritoCompra {
-    flex: 1;
-    text-align: center;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    max-width: 350px;
-    position: sticky;
-    top: 100px;
-}
-
-/* Lista de productos en el carrito */
-.lista-carrito {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-.lista-carrito li {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Ocultar la sección de impuestos por defecto */
-.tax-section.hidden {
-    display: none;
-}
-
-/* Botones del carrito */
-.carritoCompra .buy,
-.carritoCompra .delate {
-    background-color: yellow;
-    color: black;
-    border: none;
-    padding: 12px 20px;
-    margin-top: 10px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease;
-    width: 100%;
-}
-
-.carritoCompra .buy:hover,
-.carritoCompra .delate:hover {
-    background-color: gold;
-}
-
-/* Estilos para los productos en el carrito */
-.lista-carrito li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Alinear la cantidad a la derecha */
-.lista-carrito .cantidad {
-    font-size: 18px;
-    font-weight: bold;
-    color: yellow;
-}
-
-/* Estilos para los productos en el carrito */
-.lista-carrito li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Alinear la cantidad y el botón de eliminar */
-.lista-carrito .cantidad {
-    font-size: 18px;
-    font-weight: bold;
-    color: yellow;
-    margin-right: 10px;
-}
-
-/* Botón de eliminar producto (🗑️) */
-.remove-item {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: red;
-    transition: transform 0.2s ease;
-}
-
-.remove-item:hover {
-    transform: scale(1.2);
-}
-
-

@@ -1,0 +1,185 @@
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.619);        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #ffd821; 
+    border-radius: 4px;   /* color of the scroll thumb */
+  }
+* {
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    background-image: url('src/fondo4.jpg');
+    color: var(--primary-color);
+    text-align: center;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    width: 100%;
+    top: 0;
+    left: 0;}
+
+/* Logo */
+.logo {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+/* Navegación */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+/* Enlaces del menú */
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ffd821;
+}
+
+/* Botón del carrito */
+.cart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.cart-button img {
+    width: 100%;
+    height: auto;
+}
+
+.cart-button:hover {
+    transform: scale(1.1);
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    header {
+        padding: 15px 30px; /* Reduce el padding */
+    }
+
+    nav ul {
+        gap: 15px; /* Reduce el espacio entre elementos */
+    }
+
+    nav ul li a {
+        font-size: 16px; /* Reduce el tamaño de fuente */
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 24px; /* Reduce el tamaño del logo */
+        text-align: center;
+    }
+
+    nav {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px; /* Reduce el espacio entre los elementos en vertical */
+    }
+
+    nav ul li a {
+        font-size: 18px;
+    }
+
+    .cart-button {
+        margin-top: 10px;
+    }
+}
+
+/* Botón del carrito en lugar del botón de reservación */
+.cart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: 50px;
+    background-color: transparent; /* Sin fondo */
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.cart-button img {
+    width: 100%;
+    height: auto;
+}
+
+/* Efecto hover para agrandar el botón del carrito */
+.cart-button:hover {
+    transform: scale(1.1);
+}
+footer {
+ 
+    padding: 40px 20px;
+    text-align: center;
+}
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1000px;
+    margin: auto;
+}
+.footer-section {
+    margin: 10px 0;
+}
+.footer-section h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+.footer-section p, .footer-section a {
+    color: gray;
+    text-decoration: none;
+    font-size: 14px;
+}
+.footer-section a:hover {
+    color: white;
+}
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 12px;
+    color: gray;
+}
