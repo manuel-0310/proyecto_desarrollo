@@ -1,6 +1,6 @@
 Piazzeta 
 
-Piazzetta es una página web diseñada para un restaurante especializado en comida fresca y saludable. Nuestro sitio ofrece una experiencia interactiva donde los usuarios pueden explorar el menú, realizar reservaciones y conocer más sobre nuestros servicios.
+Piazzetta es una página web diseñada para un restaurante especializado en comida italiana. Nuestro sitio ofrece una experiencia interactiva donde los usuarios pueden explorar el menú, realizar reservaciones y conocer más sobre nuestros servicios.
 
 Características
     - Menú interactivo con descripción detallada de cada platillo.
