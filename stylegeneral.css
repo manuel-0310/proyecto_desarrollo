@@ -78,7 +78,7 @@ nav ul li a:hover {
 }
 
 .cart-button:hover {
-    transform: scale(1.1);
+    transform: scale(-0.1);
 }
 
 @media (max-width: 768px) {
