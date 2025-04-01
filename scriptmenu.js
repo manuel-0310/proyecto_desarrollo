@@ -1,13 +1,16 @@
+// scriptmenu.js COMPLETO
+
+const API_URL = "https://api.sheetbest.com/sheets/88a8b6fd-221c-49ba-a9de-34b0c3300146";
+
+let carrito = [];
+
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "https://api.sheetbest.com/sheets/88a8b6fd-221c-49ba-a9de-34b0c3300146";
     const categorias = {
         "Entradas": document.getElementById("menu-entradas"),
         "Pizzas": document.getElementById("menu-Pizzas"),
         "Bebidas": document.getElementById("menu-Bebidas"),
         "Postres": document.getElementById("menu-Postres")
     };
-
-    let carrito = [];
 
     const listaCarrito = document.querySelector(".lista-carrito");
     const precioElemento = document.querySelector(".precio");
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const card = document.createElement("section");
                 card.className = "menu-item";
 
-                const imagenUrl = producto.imagen?.trim() || "src/logo.png"; // imagen por defecto
+                const imagenUrl = producto.imagen?.trim().replace("https://imgur.com/", "https://i.imgur.com/") + ".png";
 
                 card.innerHTML = `
                     <div class="image-container">
@@ -109,4 +112,3 @@ document.addEventListener("DOMContentLoaded", () => {
         window.history.pushState({}, "", `?${params.toString()}`);
     }
 });
-
