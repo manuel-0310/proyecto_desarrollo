@@ -7,13 +7,9 @@
     <link rel="stylesheet" href="stylegeneral.css">
     <link rel="stylesheet" href="menustyle.css">
     <link rel="icon" type="image/png" href="src/logo.png">
-    <script src="scriptmenu.js"></script>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@700&display=swap"
-            rel="stylesheet">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
-            rel="stylesheet">
+    <script src="scriptmenu.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -30,246 +26,48 @@
         <a href="menu.html" class="cart-button">
             <img src="src/carrito.png" alt="Carrito de compras">
         </a>
-
     </header>
-    
+
     <main>
         <div class="menu-container">
             <div class="menu">
                 <div class="categoria">
                     <h2>Entradas</h2>
-                    <div class="grid-menu">
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/ajo.png" alt="Pan de Ajo">
-                            </div>
-                            <h3>Pan de Ajo</h3>
-                            <p class="price">$6</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/stick.png" alt="Mozzarella Sticks">
-                            </div>
-                            <h3>Mozzarella Sticks</h3>
-                            <p class="price">$6</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/cesar.png" alt="Ensalada César">
-                            </div>
-                            <h3>Ensalada César</h3>
-                            <p class="price">$4</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                    </div>
+                    <div id="menu-entradas" class="grid-menu"></div>
                 </div>
                 <div class="categoria">
                     <h2>Pizzas</h2>
-                    <div class="grid-menu">
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/margarita.png" alt="Pizza Margherita">
-                            </div>
-                            <h3>Margherita</h3>
-                            <p class="description">Clásica pizza con salsa de tomate, mozzarella y albahaca fresca.</p>
-                            <p class="price">$32</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/peperoni.png" alt="Pizza Pepperoni">
-                            </div>
-                            <h3>Pepperoni</h3>
-                            <p class="description">Salsa de tomate, mozzarella y pepperoni crujiente.</p>
-                            <p class="price">$37</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/pizza5.png" alt="Pizza Vegetales">
-                            </div>
-                            <h3>Vegetales</h3>
-                            <p class="description">Variedad de vegetales frescos con una mezcla de quesos derretidos.</p>
-                            <p class="price">$30</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/quesos.png" alt="Pizza Cuatro Quesos">
-                            </div>
-                            <h3>Cuatro Quesos</h3>
-                            <p class="description">Mezcla de mozzarella, gorgonzola, parmesano y cheddar.</p>
-                            <p class="price">$35</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/hawaiana.png" alt="Pizza Hawaiana">
-                            </div>
-                            <h3>Hawaiana</h3>
-                            <p class="description">Jamón, piña y queso mozzarella sobre una base de salsa de tomate.</p>
-                            <p class="price">$33</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/bbq.png" alt="Pizza Barbecue">
-                            </div>
-                            <h3>Barbecue</h3>
-                            <p class="description">Pollo desmenuzado, salsa BBQ, cebolla y queso cheddar.</p>
-                            <p class="price">$36</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/napolitana.png" alt="Pizza Napolitana">
-                            </div>
-                            <h3>Napolitana</h3>
-                            <p class="description">Salsa de tomate, anchoas, aceitunas y orégano.</p>
-                            <p class="price">$34</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/pizza4.png" alt="Pizza Diávola">
-                            </div>
-                            <h3>Diávola</h3>
-                            <p class="description">Pepperoni picante, salsa de tomate y queso mozzarella.</p>
-                            <p class="price">$38</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/marinara.png" alt="Pizza Marinara">
-                            </div>
-                            <h3>Marinara</h3>
-                            <p class="description">Salsa de tomate, ajo, orégano y aceite de oliva.</p>
-                            <p class="price">$31</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                    </div>
+                    <div id="menu-Pizzas" class="grid-menu"></div>
                 </div>
                 <div class="categoria">
                     <h2>Bebidas</h2>
-                    <div class="grid-menu">
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/coca.png" alt="Coca-Cola">
-                            </div>
-                            <h3>Coca-Cola</h3>
-                            <p class="price">$2</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/sprite.png" alt="Sprite">
-                            </div>
-                            <h3>Sprite</h3>
-                            <p class="price">$2</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/redbull.png" alt="Red Bull">
-                            </div>
-                            <h3>Red Bull</h3>
-                            <p class="price">$4</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/te.png" alt="Té Helado">
-                            </div>
-                            <h3>Té Helado</h3>
-                            <p class="price">$3</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/limonada.png" alt="Limonada Natural">
-                            </div>
-                            <h3>Limonada Natural</h3>
-                            <p class="price">$3</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/jugo.png" alt="Jugo Natural">
-                            </div>
-                            <h3>Jugo Natural</h3>
-                            <p class="price">$4</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                    </div>
+                    <div id="menu-Bebidas" class="grid-menu"></div>
                 </div>
                 <div class="categoria">
                     <h2>Postres</h2>
-                    <div class="grid-menu">
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/brownie.png" alt="Brownie de Chocolate">
-                            </div>
-                            <h3>Brownie de Chocolate</h3>
-                            <p class="price">$5</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/churro.png" alt="Churros">
-                            </div>
-                            <h3>Churros</h3>
-                            <p class="price">$4</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                        <section class="menu-item">
-                            <div class="image-container">
-                                <img src="src/helado.png" alt="Helado">
-                            </div>
-                            <h3>Helado</h3>
-                            <p class="price">$2.5</p>
-                            <button class="add-to-cart">+</button>
-                        </section>
-                    </div>
+                    <div id="menu-Postres" class="grid-menu"></div>
                 </div>
             </div>
-            
-                <section class="carritoCompra">
-                <h2>Tu carrito</h2>
-                <ul class="lista-carrito">
 
-                </ul>
+            <section class="carritoCompra">
+                <h2>Tu carrito</h2>
+                <ul class="lista-carrito"></ul>
                 <h3>Precio:</h3>
                 <p class="precio">$0</p>
-                
+
                 <div class="tax-section hidden">
                     <h3>IVA</h3>
                     <p class="impuesto">$0</p>
                     <h3>Total</h3>
                     <p class="total">$0</p>
                 </div>
-            
+
                 <button class="buy">Procesar Compra</button>
                 <button class="delate">Cancelar Compra</button>
             </section>
-            
         </div>
     </main>
-    
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -280,7 +78,6 @@
                 <h3>Horarios</h3>
                 <p>L-D 11AM - 9PM</p>
             </div>
-
             <div class="footer-section">
                 <h3>Hecho por:</h3>
                 <p>Daniel Riveros, Manuel Castillo y Samuel Borda</p>
@@ -292,3 +89,4 @@
     </footer>
 </body>
 </html>
+
