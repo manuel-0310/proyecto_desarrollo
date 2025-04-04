@@ -1,13 +1,16 @@
+// scriptmenu.js COMPLETO
+
+const API_URL = "https://api.sheetbest.com/sheets/88a8b6fd-221c-49ba-a9de-34b0c3300146";
+
+let carrito = [];
+
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "https://api.sheetbest.com/sheets/88a8b6fd-221c-49ba-a9de-34b0c3300146";
     const categorias = {
         "Entradas": document.getElementById("menu-entradas"),
         "Pizzas": document.getElementById("menu-Pizzas"),
         "Bebidas": document.getElementById("menu-Bebidas"),
         "Postres": document.getElementById("menu-Postres")
     };
-
-    let carrito = [];
 
     const listaCarrito = document.querySelector(".lista-carrito");
     const precioElemento = document.querySelector(".precio");
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const card = document.createElement("section");
                 card.className = "menu-item";
 
-                const imagenUrl = producto.imagen?.trim() || "src/logo.png"; // imagen por defecto
+                const imagenUrl = producto.imagen?.trim().replace("https://imgur.com/", "https://i.imgur.com/") + ".png";
 
                 card.innerHTML = `
                     <div class="image-container">
@@ -73,31 +76,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function actualizarCarrito() {
         listaCarrito.innerHTML = "";
-        let precioTotal = 0;
+    let precioTotal = 0;
 
-        carrito.forEach((item, index) => {
-            let li = document.createElement("li");
-            li.innerHTML = `<span class="nombre-producto">${item.nombre} ($${item.precio.toFixed(2)})</span>
-                            <span class="cantidad">x${item.cantidad}</span>
-                            <button class="eliminar-item" data-index="${index}">🗑️</button>`;
-            listaCarrito.appendChild(li);
-            precioTotal += item.precio * item.cantidad;
+    carrito.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = `<span class="nombre-producto">${item.nombre} ($${item.precio.toFixed(2)})</span>
+                        <span class="cantidad">x${item.cantidad}</span>
+                        <button class="eliminar-item" data-index="${index}">🗑️</button>`;
+        listaCarrito.appendChild(li);
+        precioTotal += item.precio * item.cantidad;
+    });
+
+    let tax = (precioTotal * 0.035).toFixed(2);
+    let total = (precioTotal + parseFloat(tax)).toFixed(2);
+
+    precioElemento.textContent = `$${precioTotal.toFixed(2)}`;
+    impuestoElemento.textContent = `$${tax}`;
+    totalElemento.textContent = `$${total}`;
+
+    // 🔹 Guardar carrito en localStorage cada vez que se actualiza
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    document.querySelectorAll(".eliminar-item").forEach(button => {
+        button.addEventListener("click", function () {
+            let index = this.getAttribute("data-index");
+            carrito.splice(index, 1);
+            actualizarCarrito();
         });
-
-        let tax = (precioTotal * 0.035).toFixed(2);
-        let total = (precioTotal + parseFloat(tax)).toFixed(2);
-
-        precioElemento.textContent = `$${precioTotal.toFixed(2)}`;
-        impuestoElemento.textContent = `$${tax}`;
-        totalElemento.textContent = `$${total}`;
-
-        document.querySelectorAll(".eliminar-item").forEach(button => {
-            button.addEventListener("click", function () {
-                let index = this.getAttribute("data-index");
-                carrito.splice(index, 1);
-                actualizarCarrito();
-            });
-        });
+    });
     }
 
     function enviarPedido() {
@@ -109,4 +115,3 @@ document.addEventListener("DOMContentLoaded", () => {
         window.history.pushState({}, "", `?${params.toString()}`);
     }
 });
-
