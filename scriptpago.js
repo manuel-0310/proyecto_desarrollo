@@ -35,33 +35,32 @@ function submitForm() {
         return;
     }
 
+    let productosString = carrito.map(item => `${item.nombre} (${item.cantidad}) - ${item.precio}$`).join("; ");
+
     const pedido = {
-        nombre: document.getElementById("nombre").value,
-        telefono: document.getElementById("telefono").value,
-        direccion: document.getElementById("direccion").value,
-        productos: carrito.map(item => ({
-            nombre: item.nombre,
-            cantidad: item.cantidad,
-            precio: item.precio // Asegura que el precio se envía
-        }))
+        Fecha: fecha,
+        Cliente: nombre,
+        Teléfono: telefono,
+        Dirección: direccion,
+        Productos: productosString,
+        Total: document.getElementById("total").textContent
     };
     
-    fetch("https://script.google.com/macros/s/AKfycbz0-KJ6gf6haInJzPdfdkO-inFGvOtzbgjaYuHdl9OA16W4MiUP-GPZ2I2EpNN1cJuVfw/exec", {
+    fetch("https://api.sheetbest.com/sheets/bf54fd4d-c232-40fa-8d4d-06bd89e9a3d3", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            nombre: "Prueba Manual",
-            telefono: "123456789",
-            direccion: "Calle Falsa 123",
-            productos: [{ nombre: "Pizza", precio: 10, cantidad: 2 }]
-        })
+        body: JSON.stringify(pedido)
+        
     })
-    .then(response => response.text())
-    .then(data => console.log("Respuesta:", data))
-    .catch(error => console.error("Error:", error));
-
-    alert("Pedido enviado con éxito.");
-    localStorage.removeItem("carrito"); // Limpia el carrito después del envío
-    window.location.href = "menu.html"; // Redirige a una página de confirmación
+    .then(response => response.json())
+    .then(data => {
+        console.log("Respuesta:", data);
+        alert("Pedido enviado con éxito.");
+        localStorage.removeItem("carrito"); // Limpia el carrito después del envío
+        window.location.href = "menu.html"; // Redirige a una página de confirmación
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Hubo un error al enviar el pedido.");
+    });
 }
-
