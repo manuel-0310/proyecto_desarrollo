@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h3>${producto.nombre}</h3>
                     <p class="description">${producto.descripcion}</p>
                     <p class="price">$${producto.precio}</p>
-                    <button class="add-to-cart" data-nombre="${producto.nombre}" data-precio="${producto.precio}">+</button>
+                    <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">+</button>
+
                 `;
 
                 if (categorias[producto.categoria]) {
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             document.querySelectorAll(".add-to-cart").forEach(button => {
                 button.addEventListener("click", () => {
+                    const idProducto = button.dataset.id;
                     const nombreProducto = button.dataset.nombre;
                     const precioProducto = parseFloat(button.dataset.precio);
 
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (productoExistente) {
                         productoExistente.cantidad++;
                     } else {
-                        carrito.unshift({ nombre: nombreProducto, precio: precioProducto, cantidad: 1 });
+                        carrito.unshift({ id: idProducto, nombre: nombreProducto, precio: precioProducto, cantidad: 1 });
                     }
 
                     actualizarCarrito();

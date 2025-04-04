@@ -46,6 +46,7 @@ document.getElementById("pedido-form").addEventListener("submit", function (e) {
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     const productos = carrito.map(item => ({
+        id: item.id,
         nombre: item.nombre,
         precio: parseFloat(item.precio) || 0,
         cantidad: parseInt(item.cantidad) || 1
