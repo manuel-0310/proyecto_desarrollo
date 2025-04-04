@@ -6,61 +6,81 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalElemento = document.getElementById("total");
 
     let subtotal = 0;
-    listaCarrito.innerHTML = ""; // Limpiar la lista antes de agregar elementos
+    listaCarrito.innerHTML = "";
 
     carrito.forEach(item => {
+        let precio = parseFloat(item.precio) || 0;
+        let cantidad = parseInt(item.cantidad) || 0;
         let li = document.createElement("li");
-        li.textContent = `* ${item.nombre} (${item.cantidad}) . . . . . . . . ${item.precio}$`;
+        li.textContent = `* ${item.nombre} (${cantidad}) - $${precio.toFixed(2)}`;
         listaCarrito.appendChild(li);
-        subtotal += item.precio * item.cantidad;
+        subtotal += precio * cantidad;
     });
 
-    let impuesto = (subtotal * 0.035).toFixed(2);
-    let total = (subtotal + parseFloat(impuesto)).toFixed(2);
+    let impuesto = subtotal * 0.035;
+    let total = subtotal + impuesto;
 
     precioElemento.textContent = `$${subtotal.toFixed(2)}`;
-    impuestoElemento.textContent = `$${impuesto}`;
-    totalElemento.textContent = `$${total}`;
+    impuestoElemento.textContent = `$${impuesto.toFixed(2)}`;
+    totalElemento.textContent = `$${total.toFixed(2)}`;
 });
 
-function submitForm() {
-    let nombre = document.getElementById("nombre").value;
-    let telefono = document.getElementById("telefono").value;
-    let direccion = document.getElementById("direccion").value;
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    let fecha = new Date().toLocaleString();
 
-    if (!nombre || !telefono || !direccion || carrito.length === 0) {
-        alert("Por favor completa todos los campos y agrega productos al carrito.");
+
+function cancelarPedido() {
+    window.location.href = "menu.html";
+}
+
+document.getElementById("pedido-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+    const direccion = document.getElementById("direccion").value.trim();
+
+    if (!nombre || !telefono || !direccion) {
+        alert("Por favor completa todos los campos.");
         return;
     }
 
-    let productosString = carrito.map(item => `${item.nombre} (${item.cantidad}) - ${item.precio}$`).join("; ");
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    const productos = carrito.map(item => ({
+        nombre: item.nombre,
+        precio: parseFloat(item.precio) || 0,
+        cantidad: parseInt(item.cantidad) || 1
+    }));
+
+    const subtotal = productos.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
+    const impuesto = subtotal * 0.035;
+    const total = subtotal + impuesto;
 
     const pedido = {
-        Fecha: fecha,
+        Fecha: new Date().toLocaleString(), // Agrega la fecha en formato legible
         Cliente: nombre,
         Teléfono: telefono,
         Dirección: direccion,
-        Productos: productosString,
-        Total: document.getElementById("total").textContent
+        Productos: JSON.stringify(productos), // Convierte el array a string
+        Total: parseFloat(total.toFixed(2))
     };
-    
-    fetch("https://api.sheetbest.com/sheets/bf54fd4d-c232-40fa-8d4d-06bd89e9a3d3", {
+
+    // Enviar datos a Sheet.best
+    fetch("https://api.sheetbest.com/sheets/f42c6560-2895-4daf-ab04-aeeb6b109672", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(pedido)
-        
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-        console.log("Respuesta:", data);
-        alert("Pedido enviado con éxito.");
-        localStorage.removeItem("carrito"); // Limpia el carrito después del envío
-        window.location.href = "menu.html"; // Redirige a una página de confirmación
+        alert("¡Pedido enviado con éxito!");
+        localStorage.removeItem("carrito");
+        window.location.href = "menu.html";
     })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Hubo un error al enviar el pedido.");
+    .catch(err => {
+        console.error("Error al enviar pedido:", err);
+        alert("Hubo un problema al enviar el pedido.");
     });
-}
+});
+
