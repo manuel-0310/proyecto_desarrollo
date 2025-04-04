@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     totalElemento.textContent = `$${total.toFixed(2)}`;
 });
 
-
-
 function cancelarPedido() {
     window.location.href = "menu.html";
 }
@@ -38,6 +36,11 @@ document.getElementById("pedido-form").addEventListener("submit", function (e) {
     const telefono = document.getElementById("telefono").value.trim();
     const direccion = document.getElementById("direccion").value.trim();
 
+    if (!/^\d+$/.test(telefono)) {
+        alert("El número de teléfono solo debe contener dígitos.");
+        return;
+    }
+    
     if (!nombre || !telefono || !direccion) {
         alert("Por favor completa todos los campos.");
         return;
@@ -57,11 +60,11 @@ document.getElementById("pedido-form").addEventListener("submit", function (e) {
     const total = subtotal + impuesto;
 
     const pedido = {
-        Fecha: new Date().toLocaleString(), // Agrega la fecha en formato legible
+        Fecha: new Date().toLocaleString(), 
         Cliente: nombre,
         Teléfono: telefono,
         Dirección: direccion,
-        Productos: JSON.stringify(productos), // Convierte el array a string
+        Productos: JSON.stringify(productos), 
         Total: parseFloat(total.toFixed(2))
     };
 

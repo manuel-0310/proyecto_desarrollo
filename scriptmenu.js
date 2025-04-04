@@ -63,12 +63,18 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => console.error("Error cargando productos:", err));
 
-    document.querySelector(".buy").addEventListener("click", () => {
-        if (carrito.length > 0) {
-            taxSection.classList.remove("hidden");
-            enviarPedido();
-        }
-    });
+        document.querySelector(".buy").addEventListener("click", (event) => {
+            if (carrito.length === 0) {
+                event.preventDefault(); // ✅ Solo prevenimos si el carrito está vacío
+                alert("Debes agregar al menos un producto antes de enviar el pedido.");
+            } else {
+                taxSection.classList.remove("hidden");
+                enviarPedido();
+            }
+        });
+        
+        
+        
 
     document.querySelector(".delate").addEventListener("click", () => {
         carrito = [];
