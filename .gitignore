@@ -1,0 +1,9 @@
+# Virtualenv
+venv/
+# Bases de datos SQLite
+db.sqlite3
+# Archivos compilados
+__pycache__/
+*.pyc
+# Archivos estáticos recopilados (si los quieres regenerar en cada deploy)
+staticfiles/
