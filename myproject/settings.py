@@ -27,7 +27,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['Aqui hay que poner el dominio o IP de tu servidor']
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
