@@ -14,8 +14,9 @@ from rest_framework.decorators import api_view, permission_classes
 @permission_classes([AllowAny]) 
 def authors(request):
     return Response([
-        {'nombre': 'Daniel Riveros', 'código': 'Código1'},
+        {'nombre': 'Daniel Riveros', 'código': '327646'},
         {'nombre': 'Manuel Castillo', 'código': '320256'},
+        {'nombre': 'Samuel Borda', 'Código': '296760'}
     ])
 
 
