@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, permission_classes
+from .serializers import UserSerializer
 
 @api_view(['GET'])
 @permission_classes([AllowAny]) 
@@ -16,11 +17,8 @@ def authors(request):
     return Response([
         {'nombre': 'Daniel Riveros', 'código': '327646'},
         {'nombre': 'Manuel Castillo', 'código': '320256'},
-        {'nombre': 'Samuel Borda', 'Código': '296760'}
+        {'nombre': 'Samuel Borda', 'código': '296760'}
     ])
-
-
-from .serializers import UserSerializer
 
 class RegisterView(APIView):
     # Cualquiera puede crear cuenta
