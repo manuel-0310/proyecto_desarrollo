@@ -1,21 +1,23 @@
-from rest_framework import generics, status
-from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+# Django
 from django.contrib.auth import authenticate
-from .serializers import UserSerializer
 from django.contrib.auth.models import User
-from .serializers import UserSerializer, OrderSerializer
+
+# DRF
 from rest_framework import generics, permissions, viewsets, status
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
-from .models import Order
-from .serializers import OrderSerializer
-from rest_framework import generics
-from rest_framework.permissions import AllowAny
-from .models import MenuItem
-from .serializers import MenuItemSerializer
+from rest_framework.views import APIView
+
+# Tu app
+from .models import MenuItem, Order
+from .serializers import (
+    UserSerializer,
+    MenuItemSerializer,
+    OrderSerializer,
+)
+
 
 class MenuItemListView(generics.ListAPIView):
     queryset = MenuItem.objects.all().order_by('id')
