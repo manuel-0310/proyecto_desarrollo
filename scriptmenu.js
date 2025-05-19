@@ -1,6 +1,6 @@
 // scriptmenu.js COMPLETO
 
-const API_URL = "https://api.sheetbest.com/sheets/88a8b6fd-221c-49ba-a9de-34b0c3300146";
+const API_URL = "https://script.google.com/macros/s/AKfycbxJ9-LxHuqQ1kGsdNqyvOQWtoG6V1eQCu9FMNEBLxFcTQ5S0AFlfwsRCnRn3_cPXrgDhA/exec";
 
 let carrito = [];
 

@@ -21,7 +21,6 @@ def authors(request):
     ])
 
 class RegisterView(APIView):
-    # Cualquiera puede crear cuenta
     authentication_classes = []
     permission_classes = []
 
@@ -29,9 +28,7 @@ class RegisterView(APIView):
         serializer = UserSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        # Si los datos son válidos, crea el usuario
         user = serializer.save()
-        # Genera y devuelve el token
         token = Token.objects.create(user=user)
         return Response({'token': token.key}, status=status.HTTP_201_CREATED)
 
