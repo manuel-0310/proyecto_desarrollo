@@ -1,6 +1,15 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from .models import MenuItem, Order, OrderItem
+from .models import MenuItem
 
+class MenuItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuItem
+        fields = ['id', 'nombre', 'descripcion', 'precio', 'imagen', 'categoria']
+
+
+# --- Serializer de Usuario (ya lo tienes) ---
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -8,5 +17,34 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        # create_user aplica hashing de contraseña
         return User.objects.create_user(**validated_data)
+
+
+# --- Serializer de cada item en el pedido ---
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = ['menu_item', 'cantidad', 'precio_unitario']
+
+
+# --- Serializer del pedido completo (incluye items) ---
+class OrderSerializer(serializers.ModelSerializer):
+    items = OrderItemSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = ['id', 'fecha_creacion', 'estado', 'items']
+        read_only_fields = ['id', 'fecha_creacion', 'estado']
+
+    def create(self, validated_data):
+        items_data = validated_data.pop('items')
+        # El usuario lo asignamos desde la vista usando context
+        order = Order.objects.create(usuario=self.context['request'].user)
+        for item in items_data:
+            OrderItem.objects.create(
+                pedido=order,
+                menu_item=item['menu_item'],
+                cantidad=item['cantidad'],
+                precio_unitario=item['precio_unitario']
+            )
+        return order
