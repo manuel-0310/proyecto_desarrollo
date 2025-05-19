@@ -1,0 +1,191 @@
+[
+  {
+    "model": "myapp.menuitem",
+    "pk": 1,
+    "fields": {
+      "nombre": "Pan de Mostaza",
+      "descripcion": "Pan horneado con mantequilla de ajo.",
+      "precio": "6"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 2,
+    "fields": {
+      "nombre": "Mozzarella Sticks",
+      "descripcion": "Palitos de queso empanizados y fritos.",
+      "precio": "6"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 3,
+    "fields": {
+      "nombre": "Ensalada César",
+      "descripcion": "Lechuga, crutones, parmesano y aderezo César.",
+      "precio": "4"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 4,
+    "fields": {
+      "nombre": "Margherita",
+      "descripcion": "Clásica pizza con salsa de tomate, mozarella y albahaca fresca.",
+      "precio": "32"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 5,
+    "fields": {
+      "nombre": "Pepperoni",
+      "descripcion": "Salsa de tomate, mozzarella y pepperoni crujiente.",
+      "precio": "37"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 6,
+    "fields": {
+      "nombre": "Vegetales",
+      "descripcion": "Variedad de vegetales frescos con una mezcla de quesos derretidos.",
+      "precio": "30"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 7,
+    "fields": {
+      "nombre": "Cuatro Quesos",
+      "descripcion": "Mezcla de mozzarella, gorgonzola, parmesano y cheddar.",
+      "precio": "35"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 8,
+    "fields": {
+      "nombre": "Hawaiana",
+      "descripcion": "Jamón, piña y queso mozarrella sobre una base de salsa de tomate.",
+      "precio": "33"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 9,
+    "fields": {
+      "nombre": "Barbecue",
+      "descripcion": "Pollo desmenuzado, salsa BBQ, cebolla y queso cheddar.",
+      "precio": "36"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 10,
+    "fields": {
+      "nombre": "Napolitana",
+      "descripcion": "Salsa de tomate, anchoas, aceitunas y orégano.",
+      "precio": "34"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 11,
+    "fields": {
+      "nombre": "Diávola",
+      "descripcion": "Pepperoni picante, salsa de tomate y queso mozarella.",
+      "precio": "38"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 12,
+    "fields": {
+      "nombre": "Marinara",
+      "descripcion": "Salsa de tomate, ajo, orégano y aceite de oliva.",
+      "precio": "31"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 13,
+    "fields": {
+      "nombre": "Coca-Cola",
+      "descripcion": "Gaseosa clásica con burbujas.",
+      "precio": "2"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 14,
+    "fields": {
+      "nombre": "Sprite",
+      "descripcion": "Refrescante gaseosa de limón.",
+      "precio": "2"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 15,
+    "fields": {
+      "nombre": "Red Bull",
+      "descripcion": "Bebida energética revitalizante.",
+      "precio": "4"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 16,
+    "fields": {
+      "nombre": "Té Helado",
+      "descripcion": "Té frío con limón y azúcar.",
+      "precio": "3"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 17,
+    "fields": {
+      "nombre": "Limonada Natural",
+      "descripcion": "Jugo de limón con azúcar y hielo.",
+      "precio": "3"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 18,
+    "fields": {
+      "nombre": "Jugo Natural",
+      "descripcion": "Bebida refrescante de frutas.",
+      "precio": "4"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 19,
+    "fields": {
+      "nombre": "Brownie de Chocolate",
+      "descripcion": "Postre suave y chocolatoso.",
+      "precio": "5"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 20,
+    "fields": {
+      "nombre": "Churros",
+      "descripcion": "Crujientes con azúcar y canela.",
+      "precio": "4"
+    }
+  },
+  {
+    "model": "myapp.menuitem",
+    "pk": 21,
+    "fields": {
+      "nombre": "Helado",
+      "descripcion": "Cremoso y refrescante.",
+      "precio": "2.5"
+    }
+  }
+]

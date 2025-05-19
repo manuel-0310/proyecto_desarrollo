@@ -1,125 +1,135 @@
-// scriptmenu.js COMPLETO
+// scriptmenu.js
 
-const API_URL = "https://api.sheetbest.com/sheets/88a8b6fd-221c-49ba-a9de-34b0c3300146";
+// URL base de tu API de productos
+const API_BASE_URL = "https://restaurante-piazzeta.onrender.com";
 
 let carrito = [];
 
+// Obtén referencias a los contenedores de cada categoría
+const categoriasContenedores = {
+  "Entradas": document.getElementById("menu-entradas"),
+  "Pizzas":   document.getElementById("menu-Pizzas"),
+  "Bebidas":  document.getElementById("menu-Bebidas"),
+  "Postres":  document.getElementById("menu-Postres")
+};
+
+// Referencias del resumen de carrito
+const listaCarrito    = document.querySelector(".lista-carrito");
+const precioElemento  = document.querySelector(".precio");
+const impuestoElemento= document.querySelector(".impuesto");
+const totalElemento   = document.querySelector(".total");
+
+// Carga el menú desde tu API y construye la UI
+async function cargarMenu() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/menu-items/`);
+    const items = await res.json();
+
+    // Agrupa por categoría
+    const porCategoria = items.reduce((acc, item) => {
+      const cat = item.categoria || "Otros";
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat].push(item);
+      return acc;
+    }, {});
+
+    // Para cada categoría, genera sus cards/botones
+    Object.entries(porCategoria).forEach(([categoria, productos]) => {
+      const contenedor = categoriasContenedores[categoria];
+      if (!contenedor) return;
+      contenedor.innerHTML = ""; // limpia antes
+      productos.forEach(prod => {
+        const card = document.createElement("div");
+        card.className = "producto-card";
+        card.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}" class="prod-img"/>
+          <h3>${prod.nombre}</h3>
+          <p>${prod.descripcion}</p>
+          <p class="precio-prod">$${parseFloat(prod.precio).toFixed(2)}</p>
+          <button class="btn-agregar" data-id="${prod.id}"
+                  data-nombre="${prod.nombre}"
+                  data-precio="${prod.precio}">
+            Añadir al carrito
+          </button>
+        `;
+        contenedor.appendChild(card);
+      });
+    });
+
+    // Agrega manejadores a todos los botones "Añadir al carrito"
+    document.querySelectorAll(".btn-agregar").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id     = btn.dataset.id;
+        const nombre = btn.dataset.nombre;
+        const precio = parseFloat(btn.dataset.precio);
+        agregarAlCarrito({ id, nombre, precio, cantidad: 1 });
+      });
+    });
+
+  } catch (err) {
+    console.error("Error cargando menú:", err);
+  }
+}
+
+// Agrega un item al carrito (o incrementa cantidad)
+function agregarAlCarrito(item) {
+  const existente = carrito.find(i => i.id === item.id);
+  if (existente) {
+    existente.cantidad++;
+  } else {
+    carrito.push({ ...item });
+  }
+  actualizarCarrito();
+}
+
+// Renderiza el carrito en pantalla y calcula totales
+function actualizarCarrito() {
+  listaCarrito.innerHTML = "";
+  let precioTotal = 0;
+
+  carrito.forEach((item, idx) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span class="nombre-producto">${item.nombre}</span>
+      <span class="cantidad">x${item.cantidad}</span>
+      <span class="subtotal">\$${(item.precio * item.cantidad).toFixed(2)}</span>
+      <button class="eliminar-item" data-index="${idx}">🗑️</button>
+    `;
+    listaCarrito.appendChild(li);
+    precioTotal += item.precio * item.cantidad;
+  });
+
+  const tax   = precioTotal * 0.035;
+  const total = precioTotal + tax;
+
+  precioElemento.textContent    = `$${precioTotal.toFixed(2)}`;
+  impuestoElemento.textContent  = `$${tax.toFixed(2)}`;
+  totalElemento.textContent     = `$${total.toFixed(2)}`;
+
+  // Guarda en localStorage
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+
+  // Buttons to remove items
+  document.querySelectorAll(".eliminar-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.dataset.index, 10);
+      carrito.splice(idx, 1);
+      actualizarCarrito();
+    });
+  });
+}
+
+// Carga carrito previo desde localStorage
+function inicializarCarrito() {
+  const saved = localStorage.getItem("carrito");
+  if (saved) {
+    carrito = JSON.parse(saved);
+    actualizarCarrito();
+  }
+}
+
+// Inicialización al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
-    const categorias = {
-        "Entradas": document.getElementById("menu-entradas"),
-        "Pizzas": document.getElementById("menu-Pizzas"),
-        "Bebidas": document.getElementById("menu-Bebidas"),
-        "Postres": document.getElementById("menu-Postres")
-    };
-
-    const listaCarrito = document.querySelector(".lista-carrito");
-    const precioElemento = document.querySelector(".precio");
-    const impuestoElemento = document.querySelector(".impuesto");
-    const totalElemento = document.querySelector(".total");
-    const taxSection = document.querySelector(".tax-section");
-
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(producto => {
-                const card = document.createElement("section");
-                card.className = "menu-item";
-
-                const imagenUrl = producto.imagen?.trim().replace("https://imgur.com/", "https://i.imgur.com/") + ".png";
-
-                card.innerHTML = `
-                    <div class="image-container">
-                        <img src="${imagenUrl}" alt="${producto.nombre}">
-                    </div>
-                    <h3>${producto.nombre}</h3>
-                    <p class="description">${producto.descripcion}</p>
-                    <p class="price">$${producto.precio}</p>
-                    <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">+</button>
-
-                `;
-
-                if (categorias[producto.categoria]) {
-                    categorias[producto.categoria].appendChild(card);
-                }
-            });
-
-            document.querySelectorAll(".add-to-cart").forEach(button => {
-                button.addEventListener("click", () => {
-                    const idProducto = button.dataset.id;
-                    const nombreProducto = button.dataset.nombre;
-                    const precioProducto = parseFloat(button.dataset.precio);
-
-                    let productoExistente = carrito.find(item => item.nombre === nombreProducto);
-
-                    if (productoExistente) {
-                        productoExistente.cantidad++;
-                    } else {
-                        carrito.unshift({ id: idProducto, nombre: nombreProducto, precio: precioProducto, cantidad: 1 });
-                    }
-
-                    actualizarCarrito();
-                });
-            });
-        })
-        .catch(err => console.error("Error cargando productos:", err));
-
-        document.querySelector(".buy").addEventListener("click", (event) => {
-            if (carrito.length === 0) {
-                event.preventDefault(); // ✅ Solo prevenimos si el carrito está vacío
-                alert("Debes agregar al menos un producto antes de enviar el pedido.");
-            } else {
-                taxSection.classList.remove("hidden");
-                enviarPedido();
-            }
-        });
-        
-        
-        
-
-    document.querySelector(".delate").addEventListener("click", () => {
-        carrito = [];
-        taxSection.classList.add("hidden");
-        actualizarCarrito();
-    });
-
-    function actualizarCarrito() {
-        listaCarrito.innerHTML = "";
-    let precioTotal = 0;
-
-    carrito.forEach((item, index) => {
-        let li = document.createElement("li");
-        li.innerHTML = `<span class="nombre-producto">${item.nombre} ($${item.precio.toFixed(2)})</span>
-                        <span class="cantidad">x${item.cantidad}</span>
-                        <button class="eliminar-item" data-index="${index}">🗑️</button>`;
-        listaCarrito.appendChild(li);
-        precioTotal += item.precio * item.cantidad;
-    });
-
-    let tax = (precioTotal * 0.035).toFixed(2);
-    let total = (precioTotal + parseFloat(tax)).toFixed(2);
-
-    precioElemento.textContent = `$${precioTotal.toFixed(2)}`;
-    impuestoElemento.textContent = `$${tax}`;
-    totalElemento.textContent = `$${total}`;
-
-    // 🔹 Guardar carrito en localStorage cada vez que se actualiza
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-    document.querySelectorAll(".eliminar-item").forEach(button => {
-        button.addEventListener("click", function () {
-            let index = this.getAttribute("data-index");
-            carrito.splice(index, 1);
-            actualizarCarrito();
-        });
-    });
-    }
-
-    function enviarPedido() {
-        const params = new URLSearchParams();
-        carrito.forEach((item, index) => {
-            params.append(`producto${index}`, `${item.nombre}(${item.cantidad})`);
-        });
-        params.append("total", totalElemento.textContent);
-        window.history.pushState({}, "", `?${params.toString()}`);
-    }
+  inicializarCarrito();
+  cargarMenu();
 });

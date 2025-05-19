@@ -12,6 +12,16 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Order
 from .serializers import OrderSerializer
+from rest_framework import generics
+from rest_framework.permissions import AllowAny
+from .models import MenuItem
+from .serializers import MenuItemSerializer
+
+class MenuItemListView(generics.ListAPIView):
+    queryset = MenuItem.objects.all().order_by('id')
+    serializer_class = MenuItemSerializer
+    permission_classes = [AllowAny]
+
 
 class RegisterView(APIView):
     authentication_classes = []

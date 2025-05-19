@@ -86,12 +86,16 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE':   'django.db.backends.postgresql',
+        'NAME':     'datos_piazzeta',
+        'USER':     'datos_piazzeta_user',
+        'PASSWORD': 'hPpNjcoxU4w6DTjgB0Jatz30sz9qAJk4',
+        'HOST':     'dpg-d0hsu3i4d50c73askg60-a.oregon-postgres.render.com',
+        'PORT':     '5432',
+    }
 }
+
 
 
 
