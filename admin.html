@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel Admin - Piazzetta</title>
+  <link rel="stylesheet" href="stylegeneral.css">
+  <link rel="icon" type="image/png" href="src/logo.png">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Administrador - Piazzetta</div>
+    <button onclick="cerrarSesion()" style="padding:10px; border-radius:10px; background:#ffd821; color:black; font-weight:bold; cursor:pointer;">Cerrar sesión</button>
+  </header>
+
+  <main>
+    <h1>Gestión de Pedidos</h1>
+
+    <section style="margin: 20px;">
+      <label for="filtro-cliente">Buscar por cliente:</label>
+      <input type="text" id="filtro-cliente" placeholder="Nombre de usuario" oninput="filtrarPedidos()" style="padding:5px; border-radius:5px;"/>
+    </section>
+
+    <section id="contenedor-pedidos" style="padding: 20px;"></section>
+  </main>
+</body>
+</html>

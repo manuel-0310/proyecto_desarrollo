@@ -18,6 +18,52 @@ from .serializers import (
     OrderSerializer,
 )
 
+from rest_framework import generics, permissions, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import Pedido
+from .serializers import PedidoSerializer
+from django.contrib.auth.models import User
+
+class IsAuthenticatedAdminOrOwner(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.is_authenticated
+
+class PedidoListCreateAPIView(generics.ListCreateAPIView):
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticatedAdminOrOwner]
+
+    def get_queryset(self):
+        usuario = self.request.user
+        estado = self.request.query_params.get("estado")
+        cliente = self.request.query_params.get("cliente")
+
+        queryset = Pedido.objects.all()
+        if not usuario.is_staff:
+            queryset = queryset.filter(usuario=usuario)
+
+        if estado:
+            queryset = queryset.filter(estado=estado)
+        if cliente:
+            queryset = queryset.filter(usuario_username_icontains=cliente)
+
+        return queryset.order_by('-fecha_creacion')
+
+    def perform_create(self, serializer):
+        serializer.save(usuario=self.request.user)
+
+class PedidoRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticatedAdminOrOwner]
+
+    def patch(self, request, *args, **kwargs):
+        pedido = self.get_object()
+        if 'estado' in request.data:
+            pedido.estado = request.data['estado']
+            pedido.save()
+            return Response(PedidoSerializer(pedido).data)
+        return Response({'detail': 'Nada para actualizar.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class MenuItemListView(generics.ListAPIView):
     queryset = MenuItem.objects.all().order_by('id')

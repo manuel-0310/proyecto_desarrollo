@@ -1,2 +1,0 @@
-from myapp.models import MenuItem
-MenuItem.objects.exists()    # Debería devolver False o True, pero no error de tabla

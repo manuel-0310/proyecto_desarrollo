@@ -2,6 +2,34 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import MenuItem, Order, OrderItem
 from .models import MenuItem
+from rest_framework import serializers
+from .models import Pedido, ItemPedido
+from django.contrib.auth.models import User
+
+class ItemPedidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ItemPedido
+        fields = ['menu_item', 'cantidad', 'precio_unitario']
+
+class PedidoSerializer(serializers.ModelSerializer):
+    items = ItemPedidoSerializer(many=True)
+    cliente = serializers.CharField(source='usuario.username', read_only=True)
+
+    class Meta:
+        model = Pedido
+        fields = ['id', 'usuario', 'cliente', 'direccion', 'estado', 'fecha_creacion', 'items']
+
+    def create(self, validated_data):
+        items_data = validated_data.pop('items')
+        pedido = Pedido.objects.create(**validated_data)
+        for item_data in items_data:
+            ItemPedido.objects.create(pedido=pedido, **item_data)
+        return pedido
+
+    def update(self, instance, validated_data):
+        instance.estado = validated_data.get('estado', instance.estado)
+        instance.save()
+        return instance
 
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:

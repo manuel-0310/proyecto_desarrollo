@@ -1,74 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login y Registro</title>
-  <link rel="stylesheet" href="loginstyle.css"/>
-  <script src="auth.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&family=Poppins&display=swap" rel="stylesheet">
-</head>
-<body>
-  <h1>Restaurante de Pizza</h1>
-
-  <!-- Sección de Registro -->
-  <section id="registro-section">
-    <h2>Registrar Usuario</h2>
-    <form id="register-form">
-      <label for="reg-username">Usuario:</label><br/>
-      <input type="text" id="reg-username" name="username" required /><br/><br/>
-
-      <label for="reg-email">Email:</label><br/>
-      <input type="email" id="reg-email" name="email" required /><br/><br/>
-
-      <label for="reg-password">Contraseña:</label><br/>
-      <input type="password" id="reg-password" name="password" required /><br/><br/>
-
-      <button type="submit">Registrar</button>
-    </form>
-  </section>
-
-  <hr/>
-
-  <!-- Sección de Login -->
-  <section id="login-section">
-    <h2>Iniciar Sesión</h2>
-    <form id="login-form">
-      <label for="login-username">Usuario:</label><br/>
-      <input type="text" id="login-username" name="username" required /><br/><br/>
-
-      <label for="login-password">Contraseña:</label><br/>
-      <input type="password" id="login-password" name="password" required /><br/><br/>
-
-      <button type="submit">Entrar</button>
-    </form>
-  </section>
-
-  <hr/>
-
-  <!-- Sección de Crear Pedido -->
-  <section id="order-section">
-    <h2>Hacer Pedido</h2>
-    <form id="order-form">
-      <label for="items">Items (JSON):</label><br/>
-      <textarea
-        id="items"
-        name="items"
-        rows="4"
-        cols="50"
-      >[{"menu_item":1,"cantidad":2,"precio_unitario":"9.99"}]</textarea><br/><br/>
-
-      <button type="submit">Enviar Pedido</button>
-    </form>
-  </section>
-
-  <hr/>
-
-  <!-- Sección de Mis Pedidos -->
-  <section id="mis-pedidos-section">
-    <h2>Mis Pedidos</h2>
-    <button id="load-orders-btn">Ver mis pedidos</button>
-    <div id="orders-container" style="margin-top:1em;"></div>
-  </section>
-</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login y Registro</title>
+    <link rel="stylesheet" href="loginstyle.css" />
+    <script src="auth.js" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&family=Poppins&display=swap"
+      rel="stylesheet">
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-box">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+          <input type="text" name="username" placeholder="Usuario" id="username"
+            required>
+          <input type="password" name="password" placeholder="Contraseña"
+            id="password" required>
+          <button type="submit" class="auth-button"
+            id="login-btn">Entrar</button>
+        </form>
+      </div>
+      <div class="auth-box">
+        <h2>Registrarse</h2>
+        <form id="register-form">
+          <input type="text" name="username" placeholder="Nombre"
+            id="newUsername" required>
+          <input type="email" name="email" placeholder="Correo electrónico">
+          <input type="password" name="password" placeholder="Contraseña"
+            id="newPassword" required>
+          <button type="submit" class="auth-button"
+            id="register-btn">Registrar</button>
+        </form>
+      </div>
+    </div>
