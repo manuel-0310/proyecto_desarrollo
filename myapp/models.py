@@ -1,6 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Pedido(models.Model):
+    ESTADOS = (
+        ('pendiente', 'Pendiente'),
+        ('atendido', 'Atendido'),
+    )
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    direccion = models.CharField(max_length=255, blank=True)
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+class ItemPedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='items')
+    menu_item = models.CharField(max_length=100)  # o un FK a MenuItem si tienes el modelo
+    cantidad = models.PositiveIntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+
 # Si ya tienes un modelo MenuItem, omítelo; si no, crea uno así:
 class MenuItem(models.Model):
     nombre       = models.CharField(max_length=100)
