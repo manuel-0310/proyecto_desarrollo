@@ -76,3 +76,16 @@ class OrderSerializer(serializers.ModelSerializer):
                 precio_unitario=item['precio_unitario']
             )
         return order
+from rest_framework import serializers
+from .models import Category, Dish
+
+class DishSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dish
+        fields = ['id', 'name', 'description', 'price', 'image_url']
+
+class CategorySerializer(serializers.ModelSerializer):
+    dishes = DishSerializer(many=True, read_only=True)
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'dishes']

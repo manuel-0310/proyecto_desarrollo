@@ -2,8 +2,8 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     RegisterView, LoginView,
-    OrderCreateView, UserOrdersView, AdminOrderViewSet, MenuItemListView
-)
+    OrderCreateView, UserOrdersView, AdminOrderViewSet, MenuItemListView)
+from .views import list_categories, list_dishes
 from django.urls import path
 from .views import PedidoListCreateAPIView, PedidoRetrieveUpdateAPIView
    
@@ -19,4 +19,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/pedidos/', PedidoListCreateAPIView.as_view(), name='pedidos-list-create'),
     path('api/pedidos/<int:pk>/', PedidoRetrieveUpdateAPIView.as_view(), name='pedido-update'),
+    path('categories/', list_categories, name='categories'),
+    path('dishes/',     list_dishes,     name='dishes'),
 ]

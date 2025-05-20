@@ -24,6 +24,26 @@ from rest_framework.views import APIView
 from .models import Pedido
 from .serializers import PedidoSerializer
 from django.contrib.auth.models import User
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from .models import Category, Dish
+from .serializers import CategorySerializer, DishSerializer
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def list_categories(request):
+    cats = Category.objects.all()
+    serializer = CategorySerializer(cats, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def list_dishes(request):
+    dishes = Dish.objects.all()
+    serializer = DishSerializer(dishes, many=True)
+    return Response(serializer.data)
+
 
 class IsAuthenticatedAdminOrOwner(permissions.BasePermission):
     def has_permission(self, request, view):
