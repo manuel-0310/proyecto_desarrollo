@@ -1,34 +1,25 @@
-# Django
+# myapp/views.py
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-
-# DRF
-from rest_framework import generics, permissions, viewsets, status
+from rest_framework import generics, permissions, status
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# Tu app
-from .models import MenuItem, Order
+from .models import Category, Dish, Pedido, ItemPedido
 from .serializers import (
     UserSerializer,
-    MenuItemSerializer,
-    OrderSerializer,
+    CategorySerializer,
+    DishSerializer,
+    PedidoSerializer,
 )
 
-from rest_framework import generics, permissions, status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .models import Pedido
-from .serializers import PedidoSerializer
-from django.contrib.auth.models import User
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from .models import Category, Dish
-from .serializers import CategorySerializer, DishSerializer
+
+# ————— Menú —————
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -36,6 +27,7 @@ def list_categories(request):
     cats = Category.objects.all()
     serializer = CategorySerializer(cats, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -45,51 +37,7 @@ def list_dishes(request):
     return Response(serializer.data)
 
 
-class IsAuthenticatedAdminOrOwner(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated
-
-class PedidoListCreateAPIView(generics.ListCreateAPIView):
-    serializer_class = PedidoSerializer
-    permission_classes = [IsAuthenticatedAdminOrOwner]
-
-    def get_queryset(self):
-        usuario = self.request.user
-        estado = self.request.query_params.get("estado")
-        cliente = self.request.query_params.get("cliente")
-
-        queryset = Pedido.objects.all()
-        if not usuario.is_staff:
-            queryset = queryset.filter(usuario=usuario)
-
-        if estado:
-            queryset = queryset.filter(estado=estado)
-        if cliente:
-            queryset = queryset.filter(usuario_username_icontains=cliente)
-
-        return queryset.order_by('-fecha_creacion')
-
-    def perform_create(self, serializer):
-        serializer.save(usuario=self.request.user)
-
-class PedidoRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = Pedido.objects.all()
-    serializer_class = PedidoSerializer
-    permission_classes = [IsAuthenticatedAdminOrOwner]
-
-    def patch(self, request, *args, **kwargs):
-        pedido = self.get_object()
-        if 'estado' in request.data:
-            pedido.estado = request.data['estado']
-            pedido.save()
-            return Response(PedidoSerializer(pedido).data)
-        return Response({'detail': 'Nada para actualizar.'}, status=status.HTTP_400_BAD_REQUEST)
-
-class MenuItemListView(generics.ListAPIView):
-    queryset = MenuItem.objects.all().order_by('id')
-    serializer_class = MenuItemSerializer
-    permission_classes = [AllowAny]
-
+# ————— Autenticación —————
 
 class RegisterView(APIView):
     authentication_classes = []
@@ -99,9 +47,7 @@ class RegisterView(APIView):
         serializer = UserSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
         user = serializer.save()
-
         token = Token.objects.create(user=user)
         return Response({'token': token.key}, status=status.HTTP_201_CREATED)
 
@@ -109,46 +55,64 @@ class RegisterView(APIView):
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request, *args, **kwargs):
-        username = request.data.get("username")
-        password = request.data.get("password")
-        user = authenticate(username=username, password=password)
-        if user:
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key}, status=status.HTTP_200_OK)
-        return Response({"error": "Credenciales inválidas"}, status=status.HTTP_401_UNAUTHORIZED)
-    
-    from rest_framework import generics, permissions, viewsets, status
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from .models import Order
-from .serializers import OrderSerializer
+    def post(self, request):
+        user = authenticate(
+            username=request.data.get('username'),
+            password=request.data.get('password')
+        )
+        if not user:
+            return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
 
-# 1) Crear un pedido (desde el carrito)
-class OrderCreateView(generics.CreateAPIView):
-    serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticated]
+
+class ProfileView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+
+# ————— Pedidos —————
+
+class PedidoListCreateAPIView(generics.ListCreateAPIView):
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_context(self):
+        # Necesario para que en Serializer.create() podamos usar `self.context['request'].user`
         return {'request': self.request}
 
-# 2) Ver mis pedidos
-class UserOrdersView(generics.ListAPIView):
-    serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
     def get_queryset(self):
-        return Order.objects.filter(usuario=self.request.user).order_by('-fecha_creacion')
+        qs = Pedido.objects.all()
+        user = self.request.user
+        if not user.is_staff:
+            qs = qs.filter(usuario=user)
+        estado = self.request.query_params.get('estado')
+        cliente = self.request.query_params.get('cliente')
+        if estado:
+            qs = qs.filter(estado=estado)
+        if cliente:
+            qs = qs.filter(usuario__username__icontains=cliente)
+        return qs.order_by('-fecha_creacion')
 
-# 3) ViewSet para administración
-class AdminOrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all().order_by('-fecha_creacion')
-    serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAdminUser]
+    def perform_create(self, serializer):
+        # El serializer ya sabe quién es request.user gracias al contexto
+        serializer.save()
 
-    @action(detail=True, methods=['post'])
-    def marcar_entregado(self, request, pk=None):
+
+class PedidoRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = Pedido.objects.all().order_by('-fecha_creacion')
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, *args, **kwargs):
         pedido = self.get_object()
-        pedido.estado = 'ENTREGADO'
-        pedido.save()
-        return Response({'estado': 'ENTREGADO'}, status=status.HTTP_200_OK)
+        nuevo_estado = request.data.get('estado')
+        if nuevo_estado:
+            pedido.estado = nuevo_estado
+            pedido.save()
+            return Response(PedidoSerializer(pedido).data)
+        return Response({'detail': 'Nada para actualizar.'}, status=status.HTTP_400_BAD_REQUEST)

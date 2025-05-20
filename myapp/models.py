@@ -1,66 +1,38 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.db import models
+from django.conf import settings
+from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-
     def __str__(self):
         return self.name
 
 class Dish(models.Model):
     category    = models.ForeignKey(Category, related_name='dishes', on_delete=models.CASCADE)
     name        = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     price       = models.DecimalField(max_digits=8, decimal_places=2)
     image_url   = models.URLField(blank=True)
-
     def __str__(self):
         return f"{self.name} ({self.category.name})"
-
 
 class Pedido(models.Model):
     ESTADOS = (
         ('pendiente', 'Pendiente'),
-        ('atendido', 'Atendido'),
+        ('atendido',  'Atendido'),
     )
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    direccion = models.CharField(max_length=255, blank=True)
-    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    usuario        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    direccion      = models.CharField(max_length=255, blank=True)
+    estado         = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
+    fecha_creacion = models.DateTimeField(default=timezone.now)
+    total          = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    def __str__(self):
+        return f"Pedido {self.id} — {self.usuario.username}"
 
 class ItemPedido(models.Model):
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='items')
-    menu_item = models.CharField(max_length=100)  # o un FK a MenuItem si tienes el modelo
-    cantidad = models.PositiveIntegerField()
-    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
-
-# Si ya tienes un modelo MenuItem, omítelo; si no, crea uno así:
-class MenuItem(models.Model):
-    nombre       = models.CharField(max_length=100)
-    descripcion  = models.TextField(blank=True)
-    precio       = models.DecimalField(max_digits=6, decimal_places=2)
-
-    def __str__(self):
-        return self.nombre
-
-class Order(models.Model):
-    ESTADO_CHOICES = [
-        ('PENDIENTE', 'Pendiente'),
-        ('ENTREGADO', 'Entregado'),
-    ]
-    usuario         = models.ForeignKey(User, related_name='orders', on_delete=models.CASCADE)
-    fecha_creacion  = models.DateTimeField(auto_now_add=True)
-    estado          = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='PENDIENTE')
-
-    def __str__(self):
-        return f'Pedido #{self.id} – {self.usuario.username}'
-
-class OrderItem(models.Model):
-    pedido          = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-    menu_item       = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    pedido          = models.ForeignKey(Pedido, related_name='items', on_delete=models.CASCADE)
+    plato           = models.ForeignKey(Dish, on_delete=models.CASCADE)
     cantidad        = models.PositiveIntegerField(default=1)
-    precio_unitario = models.DecimalField(max_digits=6, decimal_places=2)
-
+    precio_unitario = models.DecimalField(max_digits=8, decimal_places=2)
     def __str__(self):
-        return f'{self.cantidad}×{self.menu_item.nombre} (pedido {self.pedido.id})'
+        return f"{self.cantidad}×{self.plato.name}"
